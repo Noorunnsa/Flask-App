@@ -1,8 +1,8 @@
 # Use the official Python image from Docker Hub
-FROM python:3.9-slim
+FROM python:alpine3.21
 
 # Create a new user (non-root) named 'appuser'
-RUN useradd -m appuser
+RUN adduser -D -u 1000 appuser
 
 # Set the working directory in the container
 WORKDIR /app
