@@ -1,0 +1,27 @@
+# Use the official Python image from Docker Hub
+FROM python:3.9-slim
+
+# Create a new user (non-root) named 'appuser'
+RUN useradd -m appuser
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the local app files into the container's working directory
+COPY . /app
+
+# Change ownership of the app files to the non-root user
+RUN chown -R appuser:appuser /app
+
+# Install Flask and any dependencies required for the app
+RUN pip install --no-cache-dir flask
+
+# Switch to the non-root user
+USER appuser
+
+# Expose the port that the app will run on (5000 in this case)
+EXPOSE 5000
+
+# Set the command to run your Flask app
+CMD ["python3", "app.py"]
+
