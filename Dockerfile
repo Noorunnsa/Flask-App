@@ -2,19 +2,20 @@
 FROM python:alpine3.21
 
 # Create a new user (non-root) named 'appuser'
-RUN adduser -D -u 1000 appuser
+# Create a directory named '/app'
+# Change ownership of the app files to the non-root user
+# Install Flask and any dependencies required for the app
+RUN adduser -D -u 1000 appuser && \
+    mkdir -p /app && \
+    chown -R appuser:appuser /app && \
+    pip install --no-cache-dir flask
+
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the local app files into the container's working directory
 COPY . /app
-
-# Change ownership of the app files to the non-root user
-RUN chown -R appuser:appuser /app
-
-# Install Flask and any dependencies required for the app
-RUN pip install --no-cache-dir flask
 
 # Switch to the non-root user
 USER appuser
