@@ -31,3 +31,53 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 }
             }
         }
+         stage('Initialize Terraform') {
+            steps {
+                dir('terraform') {
+                    sh "terraform init"
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir('terraform') {
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', 
+                        credentialsId: 'aws-credentials']]) {
+                        sh "terraform plan --var-file=terraform.tfvars -auto-approve"
+                    }
+                }
+            }
+        }
+        stage('Manual Approval') {
+            steps {
+                input message: 'Approve Terraform Apply?', ok: 'Apply'
+            }
+        }
+        
+        stage('Terraform Apply') {
+            steps {
+                dir('terraform') {
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', 
+                        credentialsId: 'aws-credentials']]) {
+                        sh "terraform apply --var-file=terraform.tfvars -auto-approve"
+                    }
+                }
+            }
+        }
+        post {
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed!"
+        }
+     }
+   }
+}
