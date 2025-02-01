@@ -20,7 +20,7 @@ To run this project, you need:
 
 3. Configure AWS credentials:
 
-Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the following content:
+   Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the following content:
 
 ```ini
 [default]
