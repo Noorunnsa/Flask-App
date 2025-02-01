@@ -26,13 +26,13 @@ When accessing the root URL (`/`), the service returns a response in the followi
 To run this project, you need:
 - Docker installed on your system
 - Git for cloning the repository
-- An EC2 instance (if deploying on AWS)
+- An EC2 instance 
 
 ## Installation and Setup
 1. **Clone the Repository**
    ```bash
-   git clone <repository_url>
-   cd <repository_name>/app
+   git clone https://github.com/Noorunnsa/Flask-App.git
+   cd Flask-App/app
    ```
 
 2. **Build the Docker Image**
