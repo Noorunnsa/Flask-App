@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    environment {
+        // Define Docker Hub credentials ID stored in Jenkins credentials store
+        DOCKERHUB_CREDENTIALS = "dockerHubCredentials"
+    }
+    stages {
+        stage('Checkout main branch') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: 'origin/main']], userRemoteConfigs: [[url: 'https://github.com/Noorunnsa/Flask-App.git']]])
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+          sh "docker build -t noorunnisa/flask-app:${BUILD_NUMBER} app/Dockerfile"
+          sh "docker images"
+          sh "sleep 10"
+            }
+        }
+      stage('Login to DockerHub and Push Docker Image') {
+            steps {
+                script {
+                    // Load Docker Hub credentials from Jenkins credentials store
+                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USERNAME', 
+passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        // Login to Docker Hub
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                        // Push Docker image
+                        sh "docker push ${DOCKERHUB_USERNAME}/flask-app:${BUILD_NUMBER}"
+                    }
+                }
+            }
+        }
