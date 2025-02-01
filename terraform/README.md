@@ -74,6 +74,8 @@ sh ./install-terraform.sh
 1. Initialize Terraform and validate the configuration:
 
 ```bash
+terraform init
+terraform validate
 terraform plan --var-file=terraform.tfvars
 ```
 
