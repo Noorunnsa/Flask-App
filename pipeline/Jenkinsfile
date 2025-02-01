@@ -12,10 +12,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-          sh "docker build -t noorunnisa/flask-app:${BUILD_NUMBER} app/Dockerfile"
+                 script {
+                    // Load Docker Hub credentials from Jenkins credentials store
+                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USERNAME', 
+passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+          sh "docker build -t ${DOCKERHUB_USERNAME}/flask-app:${BUILD_NUMBER} -f app/Dockerfile"
           sh "docker images"
           sh "sleep 10"
-            }
+            } }
         }
       stage('Login to DockerHub and Push Docker Image') {
             steps {
@@ -77,7 +81,8 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
         }
         failure {
             echo "Pipeline failed!"
-        }
-     }
-   }
-}
+         }
+      }
+    }
+  }
+} 
