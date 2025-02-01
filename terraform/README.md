@@ -65,6 +65,9 @@ Attach the following policies to the IAM user:
 - `AmazonEC2FullAccess`
 - `AmazonECS_FullAccess`
 - `CloudWatchFullAccess`
+- `AmazonS3FullAccess`
+- `AmazonDynamoDBFullAccess`
+
 
 Create a custom inline policy named `custom-app-autoscaling` with the following JSON and attach it to the IAM user:
 
