@@ -65,6 +65,7 @@ Create a custom inline policy named `custom-app-autoscaling` with the following 
 Execute the installation script:
 
 ```bash
+chmod +x install-terraform.sh
 sh ./install-terraform.sh
 ```
 
