@@ -26,7 +26,7 @@ When accessing the root URL (`/`), the service returns a response in the followi
 To run this project, you need:
 - Docker installed on your system
 - Git for cloning the repository
-- An EC2 instance 
+- An EC2 instance (ubuntu 22.04 lts, t2.micro, 8 GB)
 
 ## Installation and Setup
    
