@@ -5,18 +5,18 @@ pipeline {
         DOCKERHUB_CREDENTIALS = "dockerHubCredentials"
     }
     stages {
-        stage('Checkout main branch') {
+      stage('Checkout main branch') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: 'origin/main']], userRemoteConfigs: [[url: 'https://github.com/Noorunnsa/Flask-App.git']]])
             }
         }
-        stage('Build Docker Image') {
+      stage('Build Docker Image') {
             steps {
                  script {
                     // Load Docker Hub credentials from Jenkins credentials store
                     withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKERHUB_USERNAME', 
 passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-          sh "docker build -t ${DOCKERHUB_USERNAME}/flask-app:${BUILD_NUMBER} -f app/Dockerfile"
+          sh "docker build -t ${DOCKERHUB_USERNAME}/flask-app:${BUILD_NUMBER} -f app/Dockerfile ."
           sh "docker images"
           sh "sleep 10"
             } }
@@ -35,14 +35,14 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 }
             }
         }
-         stage('Initialize Terraform') {
-            steps {
+      stage('Initialize Terraform') {
+          steps {
                 dir('terraform') {
                     sh "terraform init"
                 }
             }
         }
-        stage('Update Container Image Tag in terraform.tfvars') {
+      stage('Update Container Image Tag in terraform.tfvars') {
             steps {
                 dir('terraform') {
                     // Replace the image tag in terraform.tfvars file with the Jenkins build number
@@ -52,7 +52,7 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
             }
         }
 
-        stage('Terraform Plan') {
+      stage('Terraform Plan') {
             steps {
                 dir('terraform') {
                     withCredentials([[
@@ -65,13 +65,13 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 }
             }
         }
-        stage('Manual Approval') {
+      stage('Manual Approval') {
             steps {
                 input message: 'Approve Terraform Apply?', ok: 'Apply'
             }
         }
         
-        stage('Terraform Apply') {
+      stage('Terraform Apply') {
             steps {
                 dir('terraform') {
                     withCredentials([[
@@ -84,7 +84,7 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 }
             }
         }
-        post {
+  post {
         success {
             echo "Pipeline executed successfully!"
         }
