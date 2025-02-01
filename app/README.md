@@ -48,13 +48,16 @@ To run this project, you need:
    ```bash
    docker build -t noorunnisa/flask-app:latest .
    ```
-
-4. **Run the Docker Container**
+4. **Allow Traffic on port 5000**
+   
+   Allow inbound traffic on port 5000 using a custom TCP rule in the EC2 instance's security group settings.
+   
+5. **Run the Docker Container**
    ```bash
    docker run -d -p 5000:5000 <image-id>
    ```
 
-5. **Access the Service**
+6. **Access the Service**
    Open a browser or use `curl` to check the response:
    ```bash
    curl http://<ec2_public_ip>:5000/
