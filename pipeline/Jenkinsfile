@@ -42,6 +42,15 @@ passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 }
             }
         }
+        stage('Update Container Image Tag in terraform.tfvars') {
+            steps {
+                dir('terraform') {
+                    // Replace the image tag in terraform.tfvars file with the Jenkins build number
+                    sh "sed -i 's|noorunnisa/flask-app:latest|noorunnisa/flask-app:${BUILD_NUMBER}|g' terraform.tfvars"
+                    echo "Replaced image tag with noorunnisa/flask-app:${BUILD_NUMBER}"
+                }
+            }
+        }
 
         stage('Terraform Plan') {
             steps {
