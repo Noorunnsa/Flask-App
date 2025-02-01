@@ -28,7 +28,7 @@ aws_access_key_id=<enter_access_key_here>
 aws_secret_access_key=<enter_secret_access_key_here>
 ```
 
-Export the credentials file:
+   Export the credentials file:
 
 ```bash
 export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/Flask-App/terraform/.aws/credentials
