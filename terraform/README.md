@@ -39,8 +39,9 @@ Attach the following policies to the IAM user:
 - `IAMFullAccess`
 - `AmazonEC2FullAccess`
 - `AmazonECS_FullAccess`
+- `CloudWatchFullAccess`
 
-Create a custom inline policy named `custom-application-autoscaling` with the following JSON and attach it to the IAM user:
+Create a custom inline policy named `custom-app-autoscaling` with the following JSON and attach it to the IAM user:
 
 ```json
 {
