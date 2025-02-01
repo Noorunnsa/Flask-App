@@ -29,26 +29,36 @@ To run this project, you need:
 - An EC2 instance 
 
 ## Installation and Setup
-1. **Clone the Repository**
+
+1. **Install Docker**
+   ```bash
+   cd Flask-App/app
+   chmod +x docker-install.sh
+   sh ./docker-install.sh
+   systemctl enable --now docker
+   systemctl status docker
+   ```
+   
+2. **Clone the Repository**
    ```bash
    git clone https://github.com/Noorunnsa/Flask-App.git
    cd Flask-App/app
    ```
 
-2. **Build the Docker Image**
+3. **Build the Docker Image**
    ```bash
    docker build -t noorunnisa/flask-app:latest .
    ```
 
-3. **Run the Docker Container**
+4. **Run the Docker Container**
    ```bash
    docker run -d -p 5000:5000 <image-id>
    ```
 
-4. **Access the Service**
+5. **Access the Service**
    Open a browser or use `curl` to check the response:
    ```bash
-   curl http://<public_ip_EC2>:5000/
+   curl http://<ec2_public_ip>:5000/
    ```
 
 ## Security Best Practices
