@@ -66,11 +66,6 @@ To run this project, you need:
 - **Optimized Image Layers**: `RUN` commands are combined to minimize layers and improve efficiency.
 - **Non-Root User**: The container runs as a non-root user (`appuser`) to enhance security.
 
-## Environment Variables
-You can configure the service using the following environment variables:
-- `PORT`: The port on which the service runs (default: `5000`)
-- `TIMEZONE`: The timezone to display time in (default: `UTC`)
-
 ## Stopping the Service
 To stop the container, use:
 ```bash
@@ -83,5 +78,3 @@ This project is open-source and available under the MIT License.
 
 ## Author
 Noorunnisa
-
-
