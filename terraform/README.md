@@ -5,15 +5,15 @@
 1. Clone the repository and navigate to the `terraform` directory inside it.
 
 ```bash
- git clone <repo-url>
- cd <repo-name>/terraform
+ git clone https://github.com/Noorunnsa/Flask-App.git
+ cd Flask-App/terraform
 ```
 
 2. Create an IAM user on AWS and download the `.csv` file containing the access keys.
 
 3. Configure AWS credentials:
 
-Create a file at `/home/ubuntu/terraform/.aws/credentials` and add the following content:
+Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the following content:
 
 ```ini
 [default]
@@ -24,7 +24,7 @@ aws_secret_access_key=<secret_access_key>
 Export the credentials file:
 
 ```bash
-export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/terraform/.aws/credentials
+export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/Flask-App/terraform/.aws/credentials
 ```
 
 > **Note:** Ensure that the `.aws` directory is in the same location where the Terraform files are stored.
@@ -39,22 +39,7 @@ Attach the following policies to the IAM user:
 - `AmazonEC2FullAccess`
 - `AmazonECS_FullAccess`
 
-### Resolving Authorization Issues
-
-At some point, you may encounter the following error:
-
-```
-Unauthorized to perform: application-autoscaling:ListTagsForResource
-```
-
-Attempting to attach the `ApplicationAutoscalingFullAccess` policy results in the error:
-
-```
-Failed to add AWSApplicationAutoscalingECSServicePolicy to user.
-Cannot attach AWS reserved policy to an IAM user.
-```
-
-To resolve this, create a custom inline policy named `custom-application-autoscaling` with the following JSON:
+Create a custom inline policy named `custom-application-autoscaling` with the following JSON and attach it to the IAM user:
 
 ```json
 {
@@ -102,5 +87,3 @@ Once the deployment is complete, retrieve the **DNS name of the Application Load
 You should see a webpage displaying the **timestamp** along with the **IP address of the requester**.
 
 ---
-**Congratulations!** You have successfully deployed infrastructure using Terraform. 🎉
-
