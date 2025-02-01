@@ -1,5 +1,25 @@
 # Setting Up Infrastructure with Terraform
 
+## Infrastructure Overview
+
+This includes the complete infrastructure setup for deploying the Flask application on AWS, utilizing various cloud components:
+
+VPC: A dedicated Virtual Private Cloud (VPC) to ensure network isolation.
+
+Subnets: 2 Public and 2 Private subnets distributed across multiple availability zones for high availability.
+
+Route Tables: Configured to manage traffic flow between different network components.
+
+Internet Gateway: Provides internet access for resources within public subnets.
+
+NAT Gateway: Enables outbound internet access for private subnets while maintaining security.
+
+Elastic Container Service (ECS): Orchestrates the deployment of the Flask application using containers. The ECS service is deployed in two private subnets.
+
+Application Load Balancer (ALB):  Distributes incoming traffic across ECS task for better performance and reliability.
+
+Security Groups: Firewall rules to control inbound and outbound traffic, ensuring secure access.
+
 ## Prerequisites
 To run this project, you need:
 - Terraform installed on your system
