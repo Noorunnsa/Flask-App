@@ -29,20 +29,19 @@ To run this project, you need:
 - An EC2 instance 
 
 ## Installation and Setup
-
-1. **Install Docker**
+   
+1. **Clone the Repository**
    ```bash
-   cd Flask-App/app
+   git clone https://github.com/Noorunnsa/Flask-App.git
+   cd Flask-App/
+   ```
+2. **Install Docker**
+   ```bash
+   cd app
    chmod +x docker-install.sh
    sh ./docker-install.sh
    systemctl enable --now docker
    systemctl status docker
-   ```
-   
-2. **Clone the Repository**
-   ```bash
-   git clone https://github.com/Noorunnsa/Flask-App.git
-   cd Flask-App/app
    ```
 
 3. **Build the Docker Image**
