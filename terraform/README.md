@@ -20,15 +20,14 @@ To run this project, you need:
 
 3. Configure AWS credentials:
 
-   Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the following content:
+Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the following content:
 
 ```ini
 [default]
 aws_access_key_id=<enter_access_key_here>
 aws_secret_access_key=<enter_secret_access_key_here>
 ```
-
-   Export the credentials file:
+ Export the credentials file:
 
 ```bash
 export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/Flask-App/terraform/.aws/credentials
