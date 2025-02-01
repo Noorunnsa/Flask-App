@@ -1,6 +1,12 @@
 # Setting Up Infrastructure with Terraform
 
 ## Prerequisites
+To run this project, you need:
+- Terraform installed on your system
+- Git for cloning the repository
+- An EC2 instance (ubuntu 22.04 lts, t2.micro, 8 GB)
+
+## Installation and Setup
 
 1. Clone the repository and navigate to the `terraform` directory inside it.
 
