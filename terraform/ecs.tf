@@ -20,6 +20,7 @@ module "ecs" {
         }
       }
     subnet_ids = [aws_subnet.private_subnets["private_subnet_1"].id, aws_subnet.private_subnets["private_subnet_2"].id]
+    autoscaling_enabled = false
     security_group_rules = {
         alb_ingress_5000 = {
           type                     = "ingress"
@@ -39,7 +40,7 @@ module "ecs" {
       }
     load_balancer = {
         service = {
-          target_group_arn = aws_lb_target_group.webapp_tg.arn
+          target_group_arn = aws_lb_target_group.flaskapp_tg.arn
           container_name   = "flaskapp"
           container_port   = 5000
         }
