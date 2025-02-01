@@ -6,7 +6,7 @@ To run this project, you need:
 - Git for cloning the repository
 - An EC2 instance (ubuntu 22.04 lts, t2.micro, 8 GB)
 
-## Installation and Setup
+## Getting Started
 
 1. Clone the repository and navigate to the `terraform` directory inside it.
 
