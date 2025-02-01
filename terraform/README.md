@@ -87,6 +87,19 @@ Create a custom inline policy named `custom-app-autoscaling` with the following 
     ]
 }
 ```
+## Terraform State Management
+
+To store the Terraform state file securely and prevent concurrent modifications, an S3 backend with DynamoDB state locking is used.
+
+**S3 Backend Configuration**
+
+Create an S3 bucket named "flaskapp_statefiles" in the AWS account to store Terraform state files.
+Enable versioning on the bucket to maintain the history of state files.
+
+**DynamoDB State Lock**
+
+Create a DynamoDB table named "tf-state-lock" to manage state locking.
+Set "LockID" as the partition key.
 
 ## Installing Terraform
 
