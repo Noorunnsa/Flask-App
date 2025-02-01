@@ -1,0 +1,7 @@
+vpc_cidr = "10.0.0.0/16"
+ecs_cluster_name = "flaskapp-ecs"
+ecs_container_image = "noorunnisa/flask-app:latest"
+ecs_task_cpu = "1024"
+ecs_task_memory = "4096"
+region = "ap-south-1"
+alb_name = "flaskapp-alb"
