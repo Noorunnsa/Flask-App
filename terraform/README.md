@@ -18,8 +18,8 @@ Create a file at `/home/ubuntu/Flask-App/terraform/.aws/credentials` and add the
 
 ```ini
 [default]
-aws_access_key_id=<access_key>
-aws_secret_access_key=<secret_access_key>
+aws_access_key_id=<enter_access_key_here>
+aws_secret_access_key=<enter_secret_access_key_here>
 ```
 
 Export the credentials file:
