@@ -5,6 +5,7 @@
 1. Clone the repository and navigate to the `terraform` directory inside it.
 
 ```bash
+ cd /home/ubuntu
  git clone https://github.com/Noorunnsa/Flask-App.git
  cd Flask-App/terraform
 ```
