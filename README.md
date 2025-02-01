@@ -17,8 +17,8 @@ When accessing the root URL (`/`), the service returns a response in the followi
 
 ```json
 {
-  "time": "2024-07-01T12:34:56Z",
-  "timezone": "UTC"
+   "ip": "10.0.102.201",
+  "timestamp": "2025-02-01T11:11:19.594500"
 }
 ```
 
