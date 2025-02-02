@@ -79,6 +79,15 @@ pipeline {
                 }
             }
         }
+    stage('Terraform Output') {
+            steps {
+                dir('terraform') {
+                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                         sh "terraform output alb_dns_name"
+                     }
+                }
+            }
+        }
     }
 
     post {
