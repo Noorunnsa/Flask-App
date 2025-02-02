@@ -75,8 +75,5 @@ docker ps  # Get the container ID
 docker stop <container_id>
 ```
 
-## License
-This project is open-source and available under the MIT License.
-
 ## Author
 Noorunnisa
