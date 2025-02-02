@@ -38,11 +38,7 @@ pipeline {
         stage('Initialize Terraform') {
             steps {
                 dir('terraform') {
-                    withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding', 
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', 
-                        credentialsId: 'aws-credentials']]) {
+                    withAWS(credentials: 'aws-credentials') {
                     sh "terraform init"
                     }
                 }
@@ -60,11 +56,13 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                dir('terraform') {
+                dir('terraform') {  
+                     withAWS(credentials: 'aws-credentials') {
                         sh "terraform plan --var-file=terraform.tfvars"
                 }
             }
         }
+    }      
 
         stage('Manual Approval') {
             steps {
@@ -75,7 +73,9 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('terraform') {
+                     withAWS(credentials: 'aws-credentials') {
                     sh "terraform apply --var-file=terraform.tfvars -auto-approve"
+                     }
                 }
             }
         }
