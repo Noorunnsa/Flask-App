@@ -38,7 +38,13 @@ pipeline {
         stage('Initialize Terraform') {
             steps {
                 dir('terraform') {
-                    sh "AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/terraform/.aws/credentials terraform init"
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY', 
+                        credentialsId: 'aws-credentials']]) {
+                    sh "terraform init"
+                    }
                 }
             }
         }
