@@ -38,6 +38,7 @@ pipeline {
         stage('Initialize Terraform') {
             steps {
                 dir('terraform') {
+                    sh "export AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/terraform/.aws/credentials"
                     sh "terraform init"
                 }
             }
@@ -55,9 +56,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('terraform') {
-                    withCredentials([amazonWebServices(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                         sh "terraform plan --var-file=terraform.tfvars"
-                    }
                 }
             }
         }
@@ -71,9 +70,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('terraform') {
-                    withCredentials([amazonWebServices(credentialsId: 'aws-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh "terraform apply --var-file=terraform.tfvars -auto-approve"
-                    }
+                    sh "terraform apply --var-file=terraform.tfvars -auto-approve"
                 }
             }
         }
