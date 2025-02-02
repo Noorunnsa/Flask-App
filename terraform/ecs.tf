@@ -46,8 +46,5 @@ module "ecs" {
         }
       }
     }
-      depends_on = [
-    aws_lb_target_group.flaskapp_tg
-  ]
   }
 }
