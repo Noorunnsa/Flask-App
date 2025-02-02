@@ -48,6 +48,20 @@ Private Subnet 2: 10.0.1.0/24
 Public Subnet 1: 10.0.100.0/24
 Public Subnet 2: 10.0.101.0/24
 
+## Availability Zones:
+- Each subnet is assigned to an availability zone using tolist(data.aws_availability_zones.available.names)[each.value].
+- The availability zone index is determined by the each.value variable from the var.private_subnets and var.public_subnets maps.
+- each.value corresponds to an index from the var.private_subnets or var.public_subnets variable.
+- The data.aws_availability_zones.available.names fetches the available availability zones in the region.
+
+Example Availability Zone Assignment:
+If data.aws_availability_zones.available.names = ["us-east-1a", "us-east-1b", "us-east-1c"], the availability zones will be assigned as follows:
+
+Private Subnet 1: us-east-1a
+Private Subnet 2: us-east-1b
+Public Subnet 1: us-east-1a
+Public Subnet 2: us-east-1b
+
 ## Getting Started
 
 1. Clone the repository and navigate to the `terraform` directory inside it.
