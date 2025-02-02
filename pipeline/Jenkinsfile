@@ -56,10 +56,8 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                dir('terraform') {  
-                    withCredentials([usernamePassword(credentialsId: 'aws-credentials', 
-                                                  usernameVariable: 'AWS_ACCESS_KEY_ID', 
-                                                  passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                dir('terraform') { 
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
                         sh "terraform plan --var-file=terraform.tfvars"
                 }
             }
@@ -75,10 +73,8 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('terraform') {
-                     withCredentials([usernamePassword(credentialsId: 'aws-credentials', 
-                                                  usernameVariable: 'AWS_ACCESS_KEY_ID', 
-                                                  passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh "terraform apply --var-file=terraform.tfvars -auto-approve"
+                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                         sh "terraform apply --var-file=terraform.tfvars -auto-approve"
                      }
                 }
             }
