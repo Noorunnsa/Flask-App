@@ -38,10 +38,7 @@ pipeline {
         stage('Initialize Terraform') {
             steps {
                 dir('terraform') {
-                    script {
-                env.AWS_SHARED_CREDENTIALS_FILE = "/home/ubuntu/terraform/.aws/credentials"
-            }
-                    sh "terraform init"
+                    sh "AWS_SHARED_CREDENTIALS_FILE=/home/ubuntu/terraform/.aws/credentials terraform init"
                 }
             }
         }
