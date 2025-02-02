@@ -130,7 +130,7 @@ To store the Terraform state file securely and prevent concurrent modifications,
 
 **S3 Backend Configuration**
 
-Create an S3 bucket named "flaskapp_statefiles" in the AWS account to store Terraform state files.
+Create an S3 bucket named "flaskapp-statefiles" in the AWS account to store Terraform state files.
 
 Enable versioning on the bucket to maintain the history of state files.
 
