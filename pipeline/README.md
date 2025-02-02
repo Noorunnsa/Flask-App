@@ -54,7 +54,8 @@ This pipeline builds a Docker image, tags it with the build number, and pushes i
    - Configure the DockerHub credentials of type **Username and Password** and give ID as `dockerHubCredentials` to authenticate with DockerHub and push/pull images. 
 
 8. **AWS IAM Credentials**
-   - Configure the AWS IAM credentials of type **AWS Credentials** and give ID as 'aws-credentials' for Terraform to interact with AWS services. The  type "AWS Credentials" is provided by the `AWS Credentials Plugin`.
+   - Configure the AWS IAM credentials of type **AWS Credentials** and give ID as 'aws-credentials' for Terraform to interact with AWS services.
+   - The  type "AWS Credentials" is provided by the `AWS Credentials Plugin`.
 
 
 ## Usage
