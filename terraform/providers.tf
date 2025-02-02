@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "flaskapp_statefiles"
+    bucket         = "flaskapp-statefiles"
     key            = "statefiles/flaskapp.tfstate"
     region         = "us-east-1"
     dynamodb_table = "tf-state-lock"
