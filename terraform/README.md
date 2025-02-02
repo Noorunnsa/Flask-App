@@ -54,8 +54,7 @@ Public Subnet 2: 10.0.101.0/24
 - each.value corresponds to an index from the var.private_subnets or var.public_subnets variable.
 - The data.aws_availability_zones.available.names fetches the available availability zones in the region.
 
-Example Availability Zone Assignment:
-If data.aws_availability_zones.available.names = ["us-east-1a", "us-east-1b", "us-east-1c"], the availability zones will be assigned as follows:
+Example: If data.aws_availability_zones.available.names = ["us-east-1a", "us-east-1b", "us-east-1c"], the availability zones will be assigned as follows:
 
 Private Subnet 1: us-east-1a
 Private Subnet 2: us-east-1b
