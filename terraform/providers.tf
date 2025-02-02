@@ -1,3 +1,9 @@
+#Configure the AWS Provider
+provider "aws" {
+  region = var.region
+}
+
+#Configure the S3 Backend and the Dynamodb table for state locking
 terraform {
   backend "s3" {
     bucket         = "flaskapp-statefiles"
