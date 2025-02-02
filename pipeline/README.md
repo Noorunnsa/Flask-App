@@ -47,7 +47,7 @@ This pipeline builds a Docker image, tags it with the build number, and pushes i
      ```
 
 6. **Install AWS Credentials Plugin**:
-   - From the Jenkins dashboard, go to `Manage Jenkins > Manage Plugins`.
+   - From the Jenkins dashboard, go to `Manage Jenkins > Plugins > Available Plugins`.
    - Install the `AWS Credentials Plugin` for managing AWS credentials securely.
 
 7. **DockerHub Credentials**
