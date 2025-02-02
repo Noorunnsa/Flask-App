@@ -77,19 +77,20 @@ This pipeline builds a Docker image, tags it with the build number, and pushes i
    - Using the `Dockerfile` present in the `app` directory, the pipeline builds a Docker image tagged with the Jenkins build number and the DockerHub username.
 
 ### 3. **Login to DockerHub and Push Docker Image**
-   - Jenkins logs into DockerHub using the `dockerHubCredentials` stored in Jenkins credentials and pushes the built image to DockerHub.
+   - Jenkins user logs into DockerHub using the `dockerHubCredentials` stored in Jenkins credentials and pushes the built image to DockerHub.
 
 ### 4. **Initialize Terraform**
-   - The pipeline runs Terraform initialization in the `terraform` directory, setting up the required backend and providers.
+   - The pipeline runs Terraform initialization in the `terraform` directory, setting up the s3 backend, DynamoDB table for state locking, ecs module and providers.
+   - Make sure that the S3 Bucket and the DynamoDB(with LockID as partition key) are created already.
 
 ### 5. **Update Container Image Tag in `terraform.tfvars`**
-   - The pipeline updates the `terraform.tfvars` file with the new Docker image tag (`flask-app:${BUILD_NUMBER}`), which is used for the deployment in ECS.
+   - The pipeline updates the `terraform.tfvars` file with the new Docker image tag (`noorunnisa/flask-app:${BUILD_NUMBER}`), which is used for the deployment in ECS.
 
 ### 6. **Terraform Plan**
    - A Terraform plan is generated to show the infrastructure changes that will be made, based on the updated `terraform.tfvars`.
 
 ### 7. **Manual Approval**
-   - A manual approval step is included between the `plan` and `apply` stages to ensure that changes are reviewed before they are applied to production.
+   - A manual approval step is included between the `plan` and `apply` stages to ensure that changes are reviewed before they are applied.
 
 ### 8. **Terraform Apply**
    - The Terraform apply stage executes the changes from the plan stage, deploying the Flask app to AWS.
@@ -97,7 +98,9 @@ This pipeline builds a Docker image, tags it with the build number, and pushes i
 ### 9. **Terraform Output**
    - After applying the changes, the pipeline outputs the DNS name of the Application Load Balancer (ALB) associated with the deployed Flask app.
  
- Open the provided URL in the browser to access the Flask application.
+### Test the Flask Application
+
+Open the provided URL from the Jenkins console output in the web browser to access the Flask application.
 
 ## Notes
 
