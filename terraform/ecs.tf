@@ -46,5 +46,8 @@ module "ecs" {
         }
       }
     }
+      depends_on = [
+    aws_lb_listener.http_listener
+  ]
   }
 }
