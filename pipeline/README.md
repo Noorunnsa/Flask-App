@@ -18,7 +18,7 @@ Before running this pipeline, ensure you have the following:
    - Disk Size: 20GB
    - Security Group: Open port `8080` for Jenkins web UI and `22` for SSH access.
 
-2. ## Clone the repository
+2. **Clone the repository**
    - Clone the git repository and navigate to the `Flask-App/pipeline` directory.
 
       ```bash
