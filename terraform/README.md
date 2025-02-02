@@ -26,6 +26,26 @@ To run this project, you need:
 - Git for cloning the repository
 - An EC2 instance (ubuntu 22.04 lts, t2.micro, 8 GB)
 
+## Dynamic Subnet Creation Process Based on Given VPC CIDR
+
+## Private Subnets:
+
+Each subnet will be allocated a specific portion of the larger 10.0.0.0/16 CIDR block, using the cidrsubnet function with a subnet prefix length of 8. This function divides the main CIDR block into smaller subnets, each with a /24 CIDR block.
+The number of subnets to be created will depend on how many entries are defined in the var.private_subnets variable (each entry corresponds to one subnet).
+For example, var.private_subnets has 2 entries, the resulting subnets could be:
+
+Private Subnet 1: 10.0.0.0/24
+Private Subnet 2: 10.0.1.0/24
+
+## Public Subnets:
+
+The logic for the public subnets is similar to the private subnets, but with a shift in the starting point for the CIDR block by adding 100 to the value of each.value. This helps to avoid overlapping with the private subnets.
+Each public subnet is also a /24 subnet, created by shifting the subnet number with the addition of 100.
+For example, var.public_subnets has 2 entries, the resulting public subnets could be:
+
+Public Subnet 1: 10.0.100.0/24
+Public Subnet 2: 10.0.101.0/24
+
 ## Getting Started
 
 1. Clone the repository and navigate to the `terraform` directory inside it.
