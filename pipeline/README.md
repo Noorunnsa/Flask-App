@@ -58,16 +58,24 @@ Before running this pipeline, ensure you have the following:
    - From the Jenkins dashboard, go to `Manage Jenkins > Manage Plugins`.
    - Install the `AWS Credentials Plugin` for managing AWS credentials securely.
 
-7. **Add Credentials in Jenkins :**
-
-1. **DockerHub Credentials**
+7. **DockerHub Credentials**
    - Configure the DockerHub credentials of type **Username and Password** and give ID as `dockerHubCredentials` to authenticate with DockerHub and push/pull images. 
 
-2. **AWS IAM Credentials**
+8. **AWS IAM Credentials**
    - Configure the AWS IAM credentials of type **AWS Credentials** and give ID as 'aws-credentials' for Terraform to interact with AWS services. The  type "AWS Credentials" is provided by the `AWS Credentials Plugin`.
 
-## Pipeline Overview
 
+## Usage
+
+1. **Create a Jenkins Job**:
+   - Create a new `Pipeline` job in Jenkins.
+   - In the pipeline configuration, point the `Jenkinsfile` to the `pipeline/Jenkinsfile` directory in your repository.
+
+2. **Run the Pipeline**:
+   - Trigger the pipeline. The pipeline will execute the stages outlined above, from building the Docker image to deploying the Flask app to AWS.
+  
+## Pipeline Overview
+  
 ### 1. **Checkout main branch**
    - The pipeline starts by checking out the latest code from the `main` branch of the Flask-App repository.
 
@@ -81,7 +89,7 @@ Before running this pipeline, ensure you have the following:
    - The pipeline runs Terraform initialization in the `terraform` directory, setting up the required backend and providers.
 
 ### 5. **Update Container Image Tag in `terraform.tfvars`**
-   - The pipeline updates the `terraform.tfvars` file with the new Docker image tag (`flask-app:${BUILD_NUMBER}`), which is used for the deployment.
+   - The pipeline updates the `terraform.tfvars` file with the new Docker image tag (`flask-app:${BUILD_NUMBER}`), which is used for the deployment in ECS.
 
 ### 6. **Terraform Plan**
    - A Terraform plan is generated to show the infrastructure changes that will be made, based on the updated `terraform.tfvars`.
@@ -94,23 +102,13 @@ Before running this pipeline, ensure you have the following:
 
 ### 9. **Terraform Output**
    - After applying the changes, the pipeline outputs the DNS name of the Application Load Balancer (ALB) associated with the deployed Flask app.
-
-
-## Usage
-
-1. **Create a Jenkins Job**:
-   - Create a new `Pipeline` job in Jenkins.
-   - In the pipeline configuration, point the `Jenkinsfile` to the `Flask-App/pipeline` directory in your repository.
-
-2. **Run the Pipeline**:
-   - Trigger the pipeline manually or automatically based on your configuration. The pipeline will execute the stages outlined above, from building the Docker image to deploying the Flask app to AWS.
-
-3. **Access the Application**:
-   - After the `Terraform Apply` stage, the DNS name of the ALB is outputted. Open the provided URL in the browser to access the Flask application.
+ 
+ Open the provided URL in the browser to access the Flask application.
 
 ## Notes
 
-- Ensure that the EC2 instance running Jenkins has access to the required AWS resources, and the AWS credentials provided to Jenkins have sufficient permissions.
+- Ensure that the AWS IAM credentials provided to Jenkins have sufficient permissions.
+- If not yet, follow the README.md file in the Flask-App/terraform/ directory of this repository to attach the required IAM policies to the IAM user.
 - The pipeline assumes that the DockerHub and AWS credentials are already configured in Jenkins as `dockerHubCredentials` (with **Username and Password** type) and `aws-credentials` (with **AWS Credentials** type), respectively.
 
 ## Conclusion
