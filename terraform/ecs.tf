@@ -47,7 +47,7 @@ module "ecs" {
       }
     }
       depends_on = [
-    aws_lb_listener.http_listener
+    aws_lb_target_group.flaskapp_tg
   ]
   }
 }
