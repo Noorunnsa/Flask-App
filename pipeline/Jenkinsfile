@@ -39,7 +39,8 @@ pipeline {
             steps {
                 dir('terraform') {
                      withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                         rm -rf .terraform terraform.tfstate terraform.tfstate.backup
+                         sh "rm -rf .terraform"
+                         sh "rm terraform.tfstate terraform.tfstate.backup"
                          sh "terraform init"
                     }
                 }
