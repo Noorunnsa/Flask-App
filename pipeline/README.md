@@ -2,18 +2,10 @@
 
 This pipeline builds a Docker image, tags it with the build number, and pushes it to the registry. It then provisions the required infrastructure using terraform on AWS and deploys the latest image to an ECS task, with an Application Load Balancer (ALB) in front.
 
-## Pre-requisites
-
-Before running this pipeline, ensure you have the following:
-
-- **AWS Account**: With access to EC2 and IAM credentials.
-- **DockerHub Account**: To store the built Docker images.
-- **Jenkins**: Running on an EC2 instance with the necessary plugins and configurations.
-
-## Setup EC2 Instance for Jenkins
+## Getting Started
 
 1. **Launch EC2 Instance**:
-   - Instance Type: `t2.micro`
+   - Instance Type: `t3.medium`
    - OS: Ubuntu 22.04 LTS
    - Disk Size: 20GB
    - Security Group: Open port `8080` for Jenkins web UI and `22` for SSH access.
@@ -72,9 +64,10 @@ Before running this pipeline, ensure you have the following:
    - In the pipeline configuration, point the `Jenkinsfile` to the `pipeline/Jenkinsfile` directory in your repository.
 
 2. **Run the Pipeline**:
-   - Trigger the pipeline. The pipeline will execute the stages outlined above, from building the Docker image to deploying the Flask app to AWS.
+   - Trigger the pipeline. The pipeline will execute the stages outlined below, from building the Docker image to deploying the Flask app to AWS.
   
-## Pipeline Overview
+
+## Pipeline Stages Overview
   
 ### 1. **Checkout main branch**
    - The pipeline starts by checking out the latest code from the `main` branch of the Flask-App repository.
